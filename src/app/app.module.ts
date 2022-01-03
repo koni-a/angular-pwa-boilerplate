@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CoreModule } from '@core/core.module';
 import { SharedModule } from '@shared/shared.module';
@@ -14,6 +15,8 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { AuthModule } from '@modules/auth/auth.module';
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '@env';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     // app
     AppRoutingModule,
 
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
+    FlexLayoutModule,
+
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

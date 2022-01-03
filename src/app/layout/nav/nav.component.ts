@@ -1,25 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-
-import { ThemeService } from '@core/service/theme.service';
-import { environment } from '@env';
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Observable } from "rxjs";
+import { ThemeService } from "@core/service/theme.service"; 
 
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+  selector: "app-nav",
+  templateUrl: "./nav.component.html",
+  styleUrls: ["./nav.component.scss"],
 })
 export class NavComponent implements OnInit {
-  public version = '';
-  public repoUrl = 'https://github.com/mathisGarberg/angular-folder-structure';
-
+  @Output() public sidenavToggle = new EventEmitter();
   public isDarkTheme$: Observable<boolean>;
-
-  navItems = [
-    { link: '/dashboard', title: 'Home' },
-    { link: '/about', title: 'About' },
-    { link: '/contact', title: 'Contact' }
-  ];
 
   constructor(private themeService: ThemeService) {}
 
@@ -30,4 +20,8 @@ export class NavComponent implements OnInit {
   toggleTheme(checked: boolean) {
     this.themeService.setDarkTheme(checked);
   }
+
+  onToggleSidenav = () => {
+    this.sidenavToggle.emit();
+  };
 }
